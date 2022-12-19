@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+</head>
+<body>
+    <style>
+        .center{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    
+    <div class="center">
+        <canvas></canvas>
+    </div>
+    
+
+    <script>
+
+        let canvas = document.querySelector("canvas");
+        canvas.width  = 600;
+        canvas.height = 600;
+        canvas.style.border = "13px solid black";
+        let context = canvas.getContext("2d");
+
+        let cw = canvas.width;
+        let ch = canvas.height;
+
+        function getSizes() {
+            console.log("alan genişliği: ", cw);
+            console.log("alan yüksekliği: ", ch);
+            console.log("rect genişlik: ", w);
+            console.log("rect yükseklik: ", h);
+            console.log("boşluk: ", g);
+            console.log("canvas'ın sonuna olan boşluk: ", cw - (x + w));
+        }
+
+
+        
+        let ix, iy, x, y, w, h, g;
+        
+        // 5 x 5 e göre ayarlanmış oran
+        context.lineWidth = cw * 0.01;
+        w  = cw * 0.10;
+        h  = ch * 0.10;
+        g  = cw * 0.06;
+        ix = cw * 0.13;
+        iy = ch * 0.13;
+        
+
+        
+        for (let i = 0; i < 5; i++) {
+            for (let k = 0; k < 5; k++) {
+                
+                // gap'in 2.17 katı başlangıç pozisyonu (78.12) her döngüde w + g (96)
+                x = ix + (w + g) * i;
+                y = iy + (h + g) * k;
+                console.log(x);
+    
+                if (Math.random() > 0.3) {
+                    context.beginPath();
+                    context.rect(x, y, w, h);
+                    context.stroke();
+                }
+
+                if (Math.random() > 0.5) {
+
+                    context.beginPath();
+                    context.arc((x + w / 2), (y + h / 2), w / 3, 0, Math.PI * 2);
+                    context.stroke();
+
+                }
+            }
+        }
+
+        getSizes();
+    </script>
+</body>
+</html>
